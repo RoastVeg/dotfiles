@@ -1,0 +1,18 @@
+font=Fira Code 10
+background-color=#00000055
+text-color=#ffffff
+border-color=#333333
+ignore-timeout=1
+anchor=bottom-right
+default-timeout=10000
+#border-size=10
+#border-color=#00000055
+#margin=25
+
+[hidden]
+format=(and %h more)
+text-color=#777777
+
+[urgency=high]
+background-color=#c00000
+border-color=#ff0000

@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty -e emacs -nw
+set $term alacritty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 #set $menu exec $term --geometry=50x18 --fullscreen --hide-menubar --hide-scrollbar -x sway-launcher-desktop
@@ -76,7 +76,7 @@ input * {
 # Basics:
 #
     # start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+Return exec $term -e emacs -nw
 
     # kill focused window
     bindsym $mod+Shift+q kill

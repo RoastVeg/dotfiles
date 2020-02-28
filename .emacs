@@ -8,7 +8,7 @@
  '(inhibit-startup-screen t)
  '(markdown-command "markdown_py")
  '(package-selected-packages
-   '(magit exwm yaml-mode elfeed flymake-php flymake-cursor flymake-css flymake markdown-mode editorconfig jsx-mode ack json-mode rust-mode web-mode php-mode))
+   '(keychain-environment magit exwm yaml-mode elfeed flymake-php flymake-cursor flymake-css flymake markdown-mode editorconfig jsx-mode ack json-mode rust-mode web-mode php-mode))
  '(php-mode-coding-style 'psr2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -135,6 +135,7 @@ There are two things you can do about this warning:
 
 (global-set-key (kbd "<home>") 'beginning-of-line)
 (global-set-key (kbd "<end>") 'end-of-line)
+(global-set-key (kbd "C-c C-t") 'ansi-term)
 
 (require 'dired-x)
 (setq-default dired-omit-files-p t)

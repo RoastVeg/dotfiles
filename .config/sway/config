@@ -76,7 +76,8 @@ input * {
 # Basics:
 #
     # start a terminal
-    bindsym $mod+Return exec $term -e emacs -nw
+    bindsym $mod+Return exec $term -e emacsclient -t .
+    bindsym $mod+Shift+Return exec $term -e emacs -nw
 
     # kill focused window
     bindsym $mod+Shift+q kill
@@ -220,6 +221,7 @@ exec_always {
     export _JAVA_AWT_WM_NONPARENTING=1
     gsettings set org.gnome.desktop.interface gtk-theme 'Adapta-Nokto-Maia'
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Maia'
+    emacs --daemon
 }
 
 # dbus play controls

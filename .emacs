@@ -7,7 +7,7 @@
  '(inhibit-startup-screen t)
  '(markdown-command "markdown_py")
  '(package-selected-packages
-   '(keychain-environment magit exwm yaml-mode elfeed flymake-php flymake-cursor flymake-css flymake markdown-mode editorconfig jsx-mode ack json-mode rust-mode web-mode php-mode))
+   '(xterm-color keychain-environment magit exwm yaml-mode elfeed flymake-php flymake-cursor flymake-css flymake markdown-mode editorconfig jsx-mode ack json-mode rust-mode web-mode php-mode))
  '(php-mode-coding-style 'psr2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

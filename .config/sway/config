@@ -17,7 +17,6 @@ set $right l
 set $term alacritty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-#set $menu exec $term --geometry=50x18 --fullscreen --hide-menubar --hide-scrollbar -x sway-launcher-desktop
 set $menu exec $term --class sway-launcher -e sway-launcher-desktop
 
 ### Output configuration
@@ -76,7 +75,8 @@ input * {
 # Basics:
 #
     # start a terminal
-    bindsym $mod+Return exec $term -e emacsclient -t .
+    bindsym $mod+Return exec $term -e emacsclient -t -a "" .
+    # start a terminal with an isolated emacs server
     bindsym $mod+Shift+Return exec $term -e emacs -nw
 
     # kill focused window

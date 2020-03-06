@@ -39,7 +39,11 @@
     (insert (shell-command-to-string "wl-paste -n | tr -d \r")))
   (global-set-key (kbd "C-c C-w") 'wl-cut)
   (global-set-key (kbd "C-c M-w") 'wl-copy)
-  (global-set-key (kbd "C-c C-y") 'wl-paste))
+  (global-set-key (kbd "C-c C-y") 'wl-paste)
+  (global-set-key (kbd "C-c C-t") 'ansi-term))
+
+(when (display-graphic-p)
+  (global-set-key (kbd "C-c C-t") 'eshell))
 
 (normal-erase-is-backspace-mode 1)
 
@@ -134,7 +138,6 @@ There are two things you can do about this warning:
 
 (global-set-key (kbd "<home>") 'beginning-of-line)
 (global-set-key (kbd "<end>") 'end-of-line)
-(global-set-key (kbd "C-c C-t") 'ansi-term)
 
 (require 'dired-x)
 (setq-default dired-omit-files-p t)

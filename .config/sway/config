@@ -77,7 +77,7 @@ input * {
     # start a terminal
     bindsym $mod+Return exec $term -e emacsclient -t -a "" .
     # start a terminal with an isolated emacs server
-    bindsym $mod+Shift+Return exec $term -e emacs -nw
+    bindsym $mod+Shift+Return exec emacs
 
     # kill focused window
     bindsym $mod+Shift+q kill
@@ -239,7 +239,8 @@ bindsym --locked XF86MonBrightnessDown exec light -U 5 # decrease screen brightn
 #Scroll 2 on MX Master
 #bindsym button6 Mod1++
 #bindsym button7 Ctrl+-
-bindsym Ctrl+Alt+Tab exec swaylock -c $(od -A n -t x1 -N 3 /dev/urandom | sed s/\ //g)
+#bindsym Ctrl+Alt+Tab exec swaylock -c $(od -A n -t x1 -N 3 /dev/urandom | sed s/\ //g)
+bindsym Ctrl+Alt+Tab exec swaylock
 
 bindsym $mod+g exec grim -g "$(slurp)" - | wl-copy
 

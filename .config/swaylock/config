@@ -1,0 +1,21 @@
+font=Fira Code
+font-size=14
+image=~/Pictures/desktop-blur.jpg
+indicator-idle-visible
+indicator-radius=75
+indicator-thickness=10
+bs-hl-color=c0000055
+key-hl-color=7faf6855
+line-color=2d3743E0
+line-clear-color=2d3743E0
+line-ver-color=2d3743E0
+line-wrong-color=2d3743E0
+separator-color=2d3743E0
+inside-color=2d374380
+ring-color=00000055
+inside-clear-color=e1e1e080
+ring-clear-color=e1e1e055
+inside-wrong-color=ff424280
+ring-wrong-color=ff424255
+inside-ver-color=008b8b80
+ring-ver-color=008b8b55

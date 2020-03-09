@@ -7,20 +7,25 @@
  '(inhibit-startup-screen t)
  '(markdown-command "markdown_py")
  '(package-selected-packages
-   '(xterm-color keychain-environment magit exwm yaml-mode elfeed flymake-php flymake-cursor flymake-css flymake markdown-mode editorconfig jsx-mode ack json-mode rust-mode web-mode php-mode))
+   '(vterm xterm-color keychain-environment magit yaml-mode flymake-php flymake-cursor flymake-css flymake markdown-mode editorconfig jsx-mode ack json-mode rust-mode web-mode php-mode))
  '(php-mode-coding-style 'psr2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(term-color-black ((t (:background "#2d3743" :foreground "#2d3743"))))
+ '(term-color-blue ((t (:background "#008b8b" :foreground "#008b8b"))))
+ '(term-color-cyan ((t (:background "#23d7d7" :foreground "#23d7d7"))))
+ '(term-color-green ((t (:background "#7faf68" :foreground "#7faf68"))))
+ '(term-color-magenta ((t (:background "#ed74cd" :foreground "#ed74cd"))))
+ '(term-color-red ((t (:background "#ff4242" :foreground "#ff4242"))))
+ '(term-color-white ((t (:background "#e1e1e0" :foreground "#e1e1e0"))))
+ '(term-color-yellow ((t (:background "#ffad29" :foreground "#ffad29")))))
 
 (setq vc-handled-backends '(Git))
 (setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
 (setq create-lockfiles nil)
-
-(setq css-indent-offset 8)
 
 (unless (display-graphic-p)
   (defun wl-cut (beg end)
@@ -39,11 +44,12 @@
     (insert (shell-command-to-string "wl-paste -n | tr -d \r")))
   (global-set-key (kbd "C-c C-w") 'wl-cut)
   (global-set-key (kbd "C-c M-w") 'wl-copy)
-  (global-set-key (kbd "C-c C-y") 'wl-paste)
-  (global-set-key (kbd "C-c C-t") 'ansi-term))
+  (global-set-key (kbd "C-c C-y") 'wl-paste))
 
-(when (display-graphic-p)
-  (global-set-key (kbd "C-c C-t") 'eshell))
+;;(when (display-graphic-p)
+;;  (global-set-key (kbd "C-c C-t") 'eshell))
+
+(global-set-key (kbd "C-c C-t") 'vterm-other-window)
 
 (normal-erase-is-backspace-mode 1)
 
@@ -135,9 +141,31 @@ There are two things you can do about this warning:
 (provide 'fira-code-mode)
 
 (editorconfig-mode 1)
+(keychain-refresh-environment)
 
 (global-set-key (kbd "<home>") 'beginning-of-line)
 (global-set-key (kbd "<end>") 'end-of-line)
+
+(defun oleh-term-exec-hook ()
+  (let* ((buff (current-buffer))
+         (proc (get-buffer-process buff)))
+    (set-process-sentinel
+     proc
+     `(lambda (process event)
+        (if (string= event "finished\n")
+            (kill-buffer ,buff))))))
+
+(add-hook 'term-exec-hook 'oleh-term-exec-hook)
+(setq vterm-kill-buffer-on-exit t)
+
+(with-eval-after-load 'esh-mode
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (setq xterm-color-preserve-properties t)))
+
+  (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+  (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions)))
+(setenv "TERM" "xterm-24bit")
 
 (require 'dired-x)
 (setq-default dired-omit-files-p t)

@@ -70,11 +70,12 @@ plugins=(git
 	 gitfast
 	 npm
 	 docker
-	 colored-man-pages
-	 ssh-agent
 	 cargo
+	 colored-man-pages
+	 keychain
 	)
 
+zstyle :omz:plugins:keychain agents gpg,ssh
 source $ZSH/oh-my-zsh.sh
 
 # User configuration

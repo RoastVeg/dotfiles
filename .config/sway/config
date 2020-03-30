@@ -27,7 +27,7 @@ output eDP-1 pos 0 1480 res 3840x2160
 output eDP-1 scale 2
 output HDMI-A-1 pos 1920 0 res 2560x1440
 output HDMI-A-1 transform 90
-output DP-2 pos 0 400 res 1920x1080
+output DP-2 pos 0 280 res 1920x1200
 
 bindswitch --reload lid:on output eDP-1 disable
 bindswitch --reload lid:off output eDP-1 enable

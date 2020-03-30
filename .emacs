@@ -46,9 +46,6 @@
   (global-set-key (kbd "C-c M-w") 'wl-copy)
   (global-set-key (kbd "C-c C-y") 'wl-paste))
 
-;;(when (display-graphic-p)
-;;  (global-set-key (kbd "C-c C-t") 'eshell))
-
 (global-set-key (kbd "C-c C-t") 'vterm-other-window)
 
 (normal-erase-is-backspace-mode 1)
@@ -88,14 +85,14 @@ There are two things you can do about this warning:
      (lambda (s)
        (setq idx (1+ idx))
        (let* ((code (+ #Xe100 idx))
-          (width (string-width s))
-          (prefix ())
-          (suffix '(?\s (Br . Br)))
-          (n 1))
-     (while (< n width)
-       (setq prefix (append prefix '(?\s (Br . Bl))))
-       (setq n (1+ n)))
-     (cons s (append prefix suffix (list (decode-char 'ucs code))))))
+              (width (string-width s))
+              (prefix ())
+              (suffix '(?\s (Br . Br)))
+              (n 1))
+	 (while (< n width)
+	   (setq prefix (append prefix '(?\s (Br . Bl))))
+	   (setq n (1+ n)))
+	 (cons s (append prefix suffix (list (decode-char 'ucs code))))))
      list)))
 
 (defconst fira-code-mode--ligatures
@@ -140,23 +137,23 @@ There are two things you can do about this warning:
 
 (provide 'fira-code-mode)
 
+(when (display-graphic-p)
+  (defun on-find-file ()
+    (fira-code-mode))
+  (add-hook 'find-file-hook 'on-find-file))
+
 (editorconfig-mode 1)
 (keychain-refresh-environment)
 
 (global-set-key (kbd "<home>") 'beginning-of-line)
 (global-set-key (kbd "<end>") 'end-of-line)
 
-(defun oleh-term-exec-hook ()
-  (let* ((buff (current-buffer))
-         (proc (get-buffer-process buff)))
-    (set-process-sentinel
-     proc
-     `(lambda (process event)
-        (if (string= event "finished\n")
-            (kill-buffer ,buff))))))
-
-(add-hook 'term-exec-hook 'oleh-term-exec-hook)
 (setq vterm-kill-buffer-on-exit t)
+;(add-hook 'vterm-exit-functions (lambda (vterm event)
+;				  (let* ((buffer vterm)
+;					 (window (get-buffer-window buffer)))
+;				    (when window
+;                                      (delete-window window)))))
 
 (with-eval-after-load 'esh-mode
   (add-hook 'eshell-mode-hook
@@ -168,7 +165,7 @@ There are two things you can do about this warning:
 (setenv "TERM" "xterm-24bit")
 
 (require 'dired-x)
-(setq-default dired-omit-files-p t)
 (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+(add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
 
 (dired ".")

@@ -3,25 +3,20 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(misterioso))
+ '(custom-enabled-themes '(sanityinc-solarized-dark))
+ '(custom-safe-themes
+   '("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default))
  '(inhibit-startup-screen t)
  '(markdown-command "markdown_py")
  '(package-selected-packages
-   '(typescript-mode dotenv-mode vterm xterm-color keychain-environment magit yaml-mode flymake-php flymake-cursor flymake-css flymake markdown-mode editorconfig jsx-mode ack json-mode rust-mode web-mode php-mode))
+   '(color-theme-sanityinc-solarized typescript-mode dotenv-mode vterm xterm-color keychain-environment magit yaml-mode flymake-php flymake-cursor flymake-css flymake markdown-mode editorconfig jsx-mode ack json-mode rust-mode web-mode php-mode))
  '(php-mode-coding-style 'psr2))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(term-color-black ((t (:background "#2d3743" :foreground "#2d3743"))))
- '(term-color-blue ((t (:background "#008b8b" :foreground "#008b8b"))))
- '(term-color-cyan ((t (:background "#23d7d7" :foreground "#23d7d7"))))
- '(term-color-green ((t (:background "#7faf68" :foreground "#7faf68"))))
- '(term-color-magenta ((t (:background "#ed74cd" :foreground "#ed74cd"))))
- '(term-color-red ((t (:background "#ff4242" :foreground "#ff4242"))))
- '(term-color-white ((t (:background "#e1e1e0" :foreground "#e1e1e0"))))
- '(term-color-yellow ((t (:background "#ffad29" :foreground "#ffad29")))))
+ )
 
 (setq vc-handled-backends '(Git))
 (setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
@@ -48,14 +43,13 @@
 
 (global-set-key (kbd "C-c C-t") 'vterm-other-window)
 
-(normal-erase-is-backspace-mode 1)
+(add-to-list 'default-frame-alist '(font . "Fira Code 10"))
 
 (defun on-frame-open (&optional frame)
+  (normal-erase-is-backspace-mode 1)
   (unless (display-graphic-p frame)
-    (set-face-background 'default "unspecified-bg" frame)
-    (normal-erase-is-backspace-mode 0)))
-
-(add-hook 'window-setup-hook 'on-frame-open)
+    (set-face-background 'default "unspecified-bg" frame)))
+(add-hook 'after-make-frame-functions 'on-frame-open)
 
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -137,10 +131,10 @@ There are two things you can do about this warning:
 
 (provide 'fira-code-mode)
 
-(when (display-graphic-p)
-  (defun on-find-file ()
-    (fira-code-mode))
-  (add-hook 'find-file-hook 'on-find-file))
+(defun on-find-file ()
+  (when (display-graphic-p)
+    (fira-code-mode)))
+(add-hook 'find-file-hook 'on-find-file)
 
 (editorconfig-mode 1)
 (keychain-refresh-environment)

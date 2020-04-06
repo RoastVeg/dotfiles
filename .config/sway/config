@@ -75,7 +75,7 @@ input * {
 # Basics:
 #
     # start a terminal
-    bindsym $mod+Return exec $term -e emacsclient -t -a "" .
+    bindsym $mod+Return exec emacsclient -c -a "" .
     # start a terminal with an isolated emacs server
     bindsym $mod+Shift+Return exec emacs
 
@@ -125,16 +125,11 @@ input * {
 # Workspaces:
 #
 
-    set $workspace1 "1: Code"
-    set $workspace2 "2: Web"
-    set $workspace3 "3: Remote"
-    set $workspace4 "4: Web"
-
     # switch to workspace
-    bindsym $mod+1 workspace $workspace1
-    bindsym $mod+2 workspace $workspace2
-    bindsym $mod+3 workspace $workspace3
-    bindsym $mod+4 workspace $workspace4
+    bindsym $mod+1 workspace 1
+    bindsym $mod+2 workspace 2
+    bindsym $mod+3 workspace 3
+    bindsym $mod+4 workspace 4
     bindsym $mod+5 workspace 5
     bindsym $mod+6 workspace 6
     bindsym $mod+7 workspace 7
@@ -142,10 +137,10 @@ input * {
     bindsym $mod+9 workspace 9
     bindsym $mod+0 workspace 10
     # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace $workspace1
-    bindsym $mod+Shift+2 move container to workspace $workspace2
-    bindsym $mod+Shift+3 move container to workspace $workspace3
-    bindsym $mod+Shift+4 move container to workspace $workspace4
+    bindsym $mod+Shift+1 move container to workspace 1
+    bindsym $mod+Shift+2 move container to workspace 2
+    bindsym $mod+Shift+3 move container to workspace 3
+    bindsym $mod+Shift+4 move container to workspace 4
     bindsym $mod+Shift+5 move container to workspace 5
     bindsym $mod+Shift+6 move container to workspace 6
     bindsym $mod+Shift+7 move container to workspace 7
